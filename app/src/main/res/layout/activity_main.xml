@@ -20,7 +20,6 @@
         android:text="@string/registration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-
         />
     <Button
         android:id="@+id/cancelBtn"
@@ -351,8 +350,15 @@
         app:layout_constraintTop_toBottomOf="@+id/endDayEdit"
         app:layout_constraintLeft_toRightOf="@id/endMinuteEdit"
         android:layout_marginStart="15dp"
+        />
 
-
-
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        app:layout_constraintLeft_toRightOf="@id/choseFromCalendar"
+        app:layout_constraintTop_toTopOf="@id/choseFromCalendar"
+        android:text="Test"
+        android:id="@+id/test"
+        android:layout_marginStart="20dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

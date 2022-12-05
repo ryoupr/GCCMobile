@@ -31,4 +31,11 @@
     <string name="registrating">登録中...</string>
     <string name="pleaseSelectDatetime">日付を選択してください</string>
 
+
+<!--    use TestActivity-->
+    <string name="activityName">TestActivity</string>
+    <string name="getCalendarList">カレンダー一覧出力</string>
+    <string name="buck">戻る</string>
+
+
 </resources>
