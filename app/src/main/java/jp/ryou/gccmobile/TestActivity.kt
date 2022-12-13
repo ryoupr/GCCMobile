@@ -9,6 +9,7 @@ import android.provider.CalendarContract.Calendars
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.provider.CalendarContract.Events
 
 
 class TestActivity : AppCompatActivity() {
@@ -73,7 +74,38 @@ class TestActivity : AppCompatActivity() {
                 sortOrder
             )
 
-        }    
+//            カレンダー名一覧取得と出力
+            var calendar_name_list = mutableListOf<String>()
+            while (cur!!.moveToNext()) {
+//                カーソルから各プロパティの取得
+                val id : Long = cur.getLong(CALENDAR_PROJECTION_IDX_ID)
+                val name : String = cur.getString(CALENDAR_PROJECTION_IDX_NAME)
+                val accountName : String = cur.getString(CALENDAR_PROJECTION_IDX_ACCOUNT_NAME)
+                val accountType = cur.getString(CALENDAR_PROJECTION_IDX_ACCOUNT_TYPE)
+                val calendarColor : Int = cur.getInt(CALENDAR_PROJECTION_IDX_CALENDAR_COLOR)
+                val calendarColorkey : Int = cur.getInt(CALENDAR_PROJECTION_IDX_CALENDAR_COLOR_KEY)
+                val calendarDisplayNam : String = cur.getString(CALENDAR_PROJECTION_IDX_DISPLAY_NAME)
+                val calendarAccessLevel : Int = cur.getInt(CALENDAR_PROJECTION_IDX_ACCESS_LEVEL)
+                val calendarTimeZone : String = cur.getString(CALENDAR_PROJECTION_IDX_TIME_ZONE)
+                val visible : Int = cur.getInt(CALENDAR_PROJECTION_IDX_VISIBLE)
+                val syncEvents : Int = cur.getInt(CALENDAR_PROJECTION_IDX_SYNC_EVENTS)
+                val ownerAcount : String = cur.getString(CALENDAR_PROJECTION_IDX_OWNER_ACCOUNT)
+                calendar_name_list.add(name)
+                println(calendarColorkey)
+            }
+            println("calendar_name_list ↓↓↓")
+            println(calendar_name_list)
+
+
+        }
+//        予定をカレンダーへ登録
+        val add_event = findViewById<Button>(R.id.addEvent)
+        add_event.setOnClickListener {
+            Toast.makeText(this, "予定登録ボタンが押下されました", Toast.LENGTH_SHORT).show()
+            println("予定登録ボタンが押下されました")
+
+
+        }
     }
 }
 
