@@ -39,11 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-
         val registration = findViewById<Button>(R.id.registrationBtn)
         registration.setOnClickListener {
             Toast.makeText(this, "Registration button tapped.", Toast.LENGTH_SHORT).show()
