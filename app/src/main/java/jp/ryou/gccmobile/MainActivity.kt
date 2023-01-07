@@ -65,35 +65,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
 
-////GoogleHelpの内容
-//            val EVENT_PROJECTION: Array<String> = arrayOf(
-//                CalendarContract.Calendars._ID,
-//                CalendarContract.Calendars.ACCOUNT_NAME,
-//                CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
-//                CalendarContract.Calendars.OWNER_ACCOUNT
-//            )
-//            println("↓EVENT_PROJECTIONの中身")
-//            for (i in 0..EVENT_PROJECTION.size - 1) {
-//                println(" " + EVENT_PROJECTION[i])
-//            }
-//            println()
-//
-//            val PROJECTION_ID_INDEX = 0
-//            val PROJECTION_ACCOUNT_NAME_INDEX = 1
-//            val PROJECTION_DISPLAY_NAME_INDEX = 2
-//            val PROJECTION_OWNER_ACCOUNT_INDEX = 3
-//
-////            Run query.
-//            val uri: Uri = CalendarContract.Calendars.CONTENT_URI
-//            val selection: String = "((${CalendarContract.Calendars.ACCOUNT_NAME} = ?) AND (" +
-//                    "${CalendarContract.Calendars.ACCOUNT_TYPE} = ?) AND (" +
-//                    "${CalendarContract.Calendars.OWNER_ACCOUNT} = ?))"
-//            val selectionArgs: Array<String> = arrayOf(
-//                "ryou120710@gmail.com",
-//                "com.google",
-//                "ryou120710@gmail.com"
-//            )
-//            val cur: Cursor? = contentResolver.query(uri, EVENT_PROJECTION, selection, selectionArgs, null)
 
 
         }
