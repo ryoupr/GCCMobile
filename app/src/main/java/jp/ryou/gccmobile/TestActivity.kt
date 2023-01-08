@@ -152,7 +152,7 @@ class TestActivity : AppCompatActivity() {
         val goBtn = findViewById<Button>(R.id.goBtn)
         goBtn.setOnClickListener {
             Toast.makeText(applicationContext, editText.text.toString(), Toast.LENGTH_SHORT).show()
-            println(editText.toString())
+            println(editText.text.toString())
         }
 
     }

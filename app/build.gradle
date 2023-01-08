@@ -6,6 +6,9 @@ plugins {
 android {
     namespace 'jp.ryou.gccmobile'
     compileSdk 32
+    buildFeatures{
+        viewBinding true
+    }
     packagingOptions {
         resources.excludes.add("META-INF/*")
     }

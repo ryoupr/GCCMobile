@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:id="@+id/allDayCheckBox"
-    >
+    tools:context=".MainActivity">
 
 
     <Button
@@ -15,349 +13,317 @@
         android:layout_width="157dp"
         android:layout_height="60dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="3dp"
         android:text="@string/registration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        />
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="157dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="30dp"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <Button
-        android:id="@+id/selectFromTemplate"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="@string/select_from_template"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        />
-
-    <androidx.constraintlayout.utils.widget.ImageFilterButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/mic_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toRightOf="@id/selectFromTemplate"
-        android:layout_marginStart="10dp"
-        />
+        app:layout_constraintStart_toStartOf="@+id/summary" />
 
     <TextView
-        android:id="@+id/summary"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:text="@string/summary"
+        android:layout_width="389dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="610dp"
+        android:text="予定情報を入力してください"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/selectFromTemplate"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
-        />
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:text="@string/location"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/summary"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
-
-
-        />
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:text="@string/description"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/location"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
-
-
-        />
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/enteredSummary"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/selectFromTemplate"
-        app:layout_constraintLeft_toRightOf="@+id/summary"
-        android:layout_marginTop="20dp"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:autofillHints="空の予定"
         android:hint="@string/summaryHint"
-        android:autofillHints="空の予定"
         android:inputType="text"
-        />
-    <EditText
-        android:id="@+id/enteredLocation"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/enteredSummary"
         app:layout_constraintLeft_toRightOf="@+id/summary"
-        android:layout_marginTop="20dp"
-        android:hint="@string/locationHint"
-        android:autofillHints="空の予定"
-        android:inputType="text"
-        />
-    <EditText
-        android:id="@+id/enteredDescription"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/enteredLocation"
-        app:layout_constraintLeft_toRightOf="@+id/summary"
-        android:layout_marginTop="20dp"
-        android:hint="@string/descriptionHint"
-        android:autofillHints="空の予定"
-        android:inputType="text"
-        />
-    <TextView
-        android:id="@+id/startDateTimeText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/startDateTime"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        />
+        app:layout_constraintStart_toEndOf="@+id/summary"
+        app:layout_constraintTop_toTopOf="@+id/summary" />
 
-    <EditText
-        android:id="@+id/startYearEdit"
+    <CheckBox
+        android:id="@+id/allDayCheckBox"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:hint="@string/year"
-        app:layout_constraintTop_toBottomOf="@id/startDateTimeText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:inputType="number"
-        />
-
-    <TextView
-        android:id="@+id/startSlash1Text"
-        android:layout_width="15dp"
-        android:layout_height="40dp"
-        android:text="@string/slash"
-        app:layout_constraintTop_toTopOf="@id/startYearEdit"
-        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
-        android:textSize="30sp"
-        android:textAlignment="center"
-
-        />
-
-    <EditText
-        android:id="@+id/startMonthEdit"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:hint="@string/month"
-        app:layout_constraintTop_toTopOf="@id/startYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
-        android:layout_marginStart="95dp"
-        android:inputType="number"
-        />
-
-    <TextView
-        android:id="@+id/startSlash2Text"
-        android:layout_width="15dp"
-        android:layout_height="40dp"
-        android:text="@string/slash"
-        app:layout_constraintTop_toTopOf="@id/startYearEdit"
-        android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
-        android:textSize="30sp"
-        android:layout_marginStart="95dp"
-        />
-
-    <EditText
-        android:id="@+id/startDayEdit"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:hint="@string/day"
-        app:layout_constraintTop_toTopOf="@+id/startYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
-        android:layout_marginStart="190dp"
-        android:inputType="number"
-        />
-
-    <EditText
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/startYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
-        android:layout_marginStart="95dp"
-        android:inputType="number"
-        android:hint="@string/minute"
-        android:autofillHints="Minute"
-        android:id="@+id/startMinuteEdit"
-        />
-    <EditText
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/startYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
-        android:inputType="number"
-        android:hint="@string/hour"
-        android:autofillHints="Hour"
-        android:id="@+id/startHourEdit"
-        />
-
-    <TextView
-        android:layout_width="15dp"
-        android:layout_height="40dp"
-        android:id="@+id/startColonText"
-        android:text="@string/colon"
-        app:layout_constraintTop_toBottomOf="@id/startYearEdit"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
-        />
-
-
-    <TextView
-        android:id="@+id/endDateTimeText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/endDateTime"
-        app:layout_constraintTop_toBottomOf="@id/startMinuteEdit"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        />
-
-    <EditText
-        android:id="@+id/endYearEdit"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:hint="@string/year"
-        app:layout_constraintTop_toBottomOf="@id/endDateTimeText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:inputType="number"
-        />
-
-    <TextView
-        android:id="@+id/endSlash1Text"
-        android:layout_width="15dp"
-        android:layout_height="40dp"
-        android:text="@string/slash"
-        app:layout_constraintTop_toTopOf="@id/endYearEdit"
-        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
-        android:textSize="30sp"
-        android:textAlignment="center"
-
-        />
-
-    <EditText
-        android:id="@+id/endMonthEdit"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:hint="@string/month"
-        app:layout_constraintTop_toTopOf="@id/endYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
-        android:layout_marginStart="95dp"
-        android:inputType="number"
-        />
+        android:checked="false"
+        android:text="@string/allDay"
+        app:layout_constraintLeft_toRightOf="@id/endMinuteEdit"
+        app:layout_constraintTop_toBottomOf="@+id/endDayEdit" />
 
     <TextView
         android:id="@+id/endSlash2Text"
         android:layout_width="15dp"
         android:layout_height="40dp"
         android:text="@string/slash"
-        app:layout_constraintTop_toTopOf="@id/endYearEdit"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
         android:textSize="30sp"
-        android:layout_marginStart="95dp"
-        />
+        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/endMonthEdit"
+        app:layout_constraintTop_toTopOf="@id/endYearEdit" />
+
+    <EditText
+        android:id="@+id/endYearEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/year"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/endDateTimeText"
+        app:layout_constraintTop_toBottomOf="@id/endDateTimeText" />
 
     <EditText
         android:id="@+id/endDayEdit"
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:hint="@string/day"
-        app:layout_constraintTop_toTopOf="@+id/endYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
-        android:layout_marginStart="190dp"
         android:inputType="number"
-        />
+        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/endSlash2Text"
+        app:layout_constraintTop_toTopOf="@+id/endYearEdit" />
+
+    <TextView
+        android:id="@+id/startSlash2Text"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:text="@string/slash"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/startMonthEdit"
+        app:layout_constraintTop_toTopOf="@id/startYearEdit" />
+
+    <TextView
+        android:id="@+id/summary"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="208dp"
+        android:text="@string/summary"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/startDateTimeText"
+        android:layout_width="109dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="340dp"
+        android:text="@string/startDateTime"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/endYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
-        android:layout_marginStart="95dp"
-        android:inputType="number"
-        android:hint="@string/minute"
-        android:autofillHints="Minute"
         android:id="@+id/endMinuteEdit"
-        />
-    <EditText
         android:layout_width="80dp"
         android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/endYearEdit"
-        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
+        android:autofillHints="Minute"
+        android:hint="@string/minute"
         android:inputType="number"
-        android:hint="@string/hour"
+        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/endColonText"
+        app:layout_constraintTop_toBottomOf="@id/endYearEdit" />
+
+    <EditText
+        android:id="@+id/startMinuteEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:autofillHints="Minute"
+        android:hint="@string/minute"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/startColonText"
+        app:layout_constraintTop_toBottomOf="@id/startYearEdit" />
+
+    <TextView
+        android:id="@+id/startColonText"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:text="@string/colon"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/startHourEdit"
+        app:layout_constraintTop_toBottomOf="@id/startYearEdit" />
+
+    <TextView
+        android:id="@+id/startSlash1Text"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:text="@string/slash"
+        android:textAlignment="center"
+        android:textSize="30sp"
+
+        app:layout_constraintLeft_toRightOf="@id/startYearEdit"
+        app:layout_constraintTop_toTopOf="@id/startYearEdit" />
+
+    <EditText
+        android:id="@+id/startDayEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:hint="@string/day"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/startSlash2Text"
+        app:layout_constraintTop_toTopOf="@+id/startYearEdit" />
+
+    <TextView
+        android:id="@+id/endColonText"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:text="@string/colon"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/endHourEdit"
+        app:layout_constraintTop_toBottomOf="@id/endYearEdit" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:text="@string/description"
+        android:textSize="30sp"
+
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/location"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <EditText
+        android:id="@+id/endMonthEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:hint="@string/month"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/endSlash1Text"
+        app:layout_constraintTop_toTopOf="@id/endYearEdit" />
+
+    <EditText
+        android:id="@+id/enteredDescription"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:autofillHints="空の予定"
+        android:hint="@string/descriptionHint"
+        android:inputType="text"
+        app:layout_constraintLeft_toRightOf="@+id/summary"
+        app:layout_constraintStart_toEndOf="@+id/description"
+        app:layout_constraintTop_toTopOf="@+id/description" />
+
+    <EditText
+        android:id="@+id/enteredLocation"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:autofillHints="空の予定"
+        android:hint="@string/locationHint"
+        android:inputType="text"
+        app:layout_constraintLeft_toRightOf="@+id/summary"
+        app:layout_constraintStart_toEndOf="@+id/location"
+        app:layout_constraintTop_toTopOf="@+id/location" />
+
+    <EditText
+        android:id="@+id/startMonthEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:hint="@string/month"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
+        app:layout_constraintStart_toEndOf="@+id/startSlash1Text"
+        app:layout_constraintTop_toTopOf="@id/startYearEdit" />
+
+    <EditText
+        android:id="@+id/startHourEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:autofillHints="Hour"
+        android:hint="@string/hour"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
+        app:layout_constraintTop_toBottomOf="@id/startYearEdit" />
+
+    <TextView
+        android:id="@+id/endSlash1Text"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:text="@string/slash"
+        android:textAlignment="center"
+        android:textSize="30sp"
+
+        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
+        app:layout_constraintTop_toTopOf="@id/endYearEdit" />
+
+    <EditText
+        android:id="@+id/startYearEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/year"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/startDateTimeText"
+        app:layout_constraintTop_toBottomOf="@id/startDateTimeText" />
+
+    <TextView
+        android:id="@+id/endDateTimeText"
+        android:layout_width="123dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="472dp"
+        android:text="@string/endDateTime"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/endHourEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:autofillHints="Hour"
+        android:hint="@string/hour"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
+        app:layout_constraintTop_toBottomOf="@id/endYearEdit" />
+
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:text="@string/location"
+
+
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        app:layout_constraintTop_toBottomOf="@+id/summary" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="157dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:text="Test"
+        app:layout_constraintBottom_toBottomOf="@+id/registrationBtn"
+        app:layout_constraintStart_toEndOf="@+id/registrationBtn" />
+
+    <Spinner
+        android:layout_width="343dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/summary"
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        android:id="@+id/spinner"
+        android:autofillHints="登録するカレンダーを選択してください"
+
         />
 
     <TextView
-        android:layout_width="15dp"
-        android:layout_height="40dp"
-        android:id="@+id/endColonText"
-        android:text="@string/colon"
-        app:layout_constraintTop_toBottomOf="@id/endYearEdit"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@id/endYearEdit"
-        />
+        android:layout_width="272dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner"
+        android:id="@+id/selectedItem"/>
 
-    <Button
-        android:layout_width="157dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@id/endMinuteEdit"
-        app:layout_constraintLeft_toLeftOf="@id/registrationBtn"
-        android:id="@+id/choseFromCalendar"
-        android:text="@string/choseFromCalendar"
-        android:layout_marginTop="10dp"
-        />
-
-    <CheckBox
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:text="@string/allDay"
-        app:layout_constraintTop_toBottomOf="@+id/endDayEdit"
-        app:layout_constraintLeft_toRightOf="@id/endMinuteEdit"
-        android:layout_marginStart="15dp"
-        />
-
-    <Button
-        android:layout_width="157dp"
-        android:layout_height="60dp"
-        app:layout_constraintLeft_toLeftOf="@+id/cancelBtn"
-        app:layout_constraintTop_toTopOf="@id/choseFromCalendar"
-        android:text="Test"
-        android:id="@+id/test"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>
