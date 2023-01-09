@@ -78,6 +78,17 @@
         android:id="@+id/goBtn"
         />
 
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:id="@+id/printIndex"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="200dp"
+        android:text="printIndex"
+        />
+
 
 
 

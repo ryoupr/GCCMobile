@@ -155,6 +155,19 @@ class TestActivity : AppCompatActivity() {
             println(editText.text.toString())
         }
 
+        //index取得テスト
+        val printIndex = findViewById<Button>(R.id.printIndex)
+        printIndex.setOnClickListener {
+            val values = listOf(1, "日本の祝日", 2, "誕生日", 3, "ファミリー カレンダー", 4, "raika.momo7@gmail.com", 5, "学校", 6, "ryou120710@gmail.com", 7, "シフト", 8, "記念日", 9, "sample")
+            val item = "sample"
+
+            val index = values.indexOf(item)
+            println(values[index-1])
+            println(index)
+
+
+        }
+
     }
 }
 
