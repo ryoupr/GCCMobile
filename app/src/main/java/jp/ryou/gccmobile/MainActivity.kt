@@ -1,5 +1,6 @@
 package jp.ryou.gccmobile
 
+import android.app.Application
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
@@ -25,8 +26,28 @@ import jp.ryou.gccmobile.databinding.ActivityMainBinding
 import java.util.*
 
 
+
+
+
+
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+
+    class myApp : Application(){
+        public var selectedCalendar: String? = null
+
+        companion object {
+            private var instance : myApp? = null
+
+            fun getInstance(): myApp {
+                if (instance == null )
+                    instance = myApp()
+
+                return instance!!
+            }
+        }
+    }
 
 
 
@@ -35,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setContentView(R.layout.activity_main)
+
 
 //        カレンダーへのアクセス権要求
         if (Build.VERSION.SDK_INT >= 23) {
@@ -136,6 +158,7 @@ class MainActivity : AppCompatActivity() {
             calendarNameList
         )
 
+
         //選択肢のレイアウト
         adapter.setDropDownViewResource(com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
 
@@ -154,12 +177,14 @@ class MainActivity : AppCompatActivity() {
                 println(selectedCalendar)
                 if (selectedCalendar!="登録先カレンダーを選択してください"){
                     Toast.makeText(this@MainActivity, "$selectedCalendar が選択されました。", Toast.LENGTH_SHORT).show()
+
+
                 }
             }
 
             //　アイテムが選択されなかった
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                //
+                //選択されなかった場合の処理
             }
         }
 
@@ -215,7 +240,9 @@ class MainActivity : AppCompatActivity() {
 
             //カレンダーIDの特定
             //calendarIdNameListから選択されたカレンダー名（文字列）を検索し、インデックスから１引けばIDとなるはず。
-//            val index = calendarIdNameList.indexOf(selected)
+            //val index = calendarIdNameList.indexOf(selected)
+
+
 
 
 
@@ -234,17 +261,11 @@ class MainActivity : AppCompatActivity() {
             println("登録完了")
         }
 
-
-
         val test = findViewById<Button>(R.id.test)
         test.setOnClickListener {
             Toast.makeText(this, "Test Btn Pushed.", Toast.LENGTH_SHORT).show()
             val intent = Intent(applicationContext , TestActivity::class.java)
             startActivity(intent)
-
-
-
-
         }
 
 

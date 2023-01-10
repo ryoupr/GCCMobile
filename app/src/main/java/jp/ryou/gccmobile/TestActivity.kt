@@ -139,7 +139,9 @@ class TestActivity : AppCompatActivity() {
             var cr : ContentResolver = getContentResolver()
             var values : ContentValues =  ContentValues()
             values.put(CalendarContract.Events.DTSTART, startMillis)
-            values.put(CalendarContract.Events.DTEND, endMillis)
+            values.put(CalendarContract.
+
+            Events.DTEND, endMillis)
             values.put(CalendarContract.Events.TITLE, "テストイベント")
             values.put(CalendarContract.Events.DESCRIPTION, "これはテストイベントです。")
             values.put(CalendarContract.Events.CALENDAR_ID, 9)
