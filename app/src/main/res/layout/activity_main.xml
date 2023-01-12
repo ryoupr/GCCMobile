@@ -326,4 +326,14 @@
         app:layout_constraintTop_toTopOf="@+id/spinner"
         android:id="@+id/selectedItem"/>
 
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="Any"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/summary"
+        android:layout_marginTop="30dp"
+        android:id="@+id/anyBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

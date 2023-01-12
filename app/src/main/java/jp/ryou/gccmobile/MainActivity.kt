@@ -25,6 +25,23 @@ import androidx.core.app.ActivityCompat
 import jp.ryou.gccmobile.databinding.ActivityMainBinding
 import java.util.*
 
+class MyApp :Application(){
+    var QRResult: String? = null
+    var selectedCalendar : String? = null
+    var test : String? = "Test"
+
+    companion object {
+        private var instance : MyApp? = null
+
+        fun  getInstance(): MyApp {
+            if (instance == null)
+                instance = MyApp()
+
+            return instance!!
+        }
+    }
+}
+
 
 
 
@@ -34,20 +51,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
-    class myApp : Application(){
-        public var selectedCalendar: String? = null
-
-        companion object {
-            private var instance : myApp? = null
-
-            fun getInstance(): myApp {
-                if (instance == null )
-                    instance = myApp()
-
-                return instance!!
-            }
-        }
-    }
 
 
 
@@ -142,8 +145,8 @@ class MainActivity : AppCompatActivity() {
             calendarNameList.add(name)
             calendarIdList.add(id)
             val idStr  = id.toString()
-            calendarIdNameList.add(idStr)
-            calendarIdNameList.add(name)
+            calendarIdNameList.add(idStr.toString())
+            calendarIdNameList.add(name.toString())
         }
 
 
@@ -168,17 +171,16 @@ class MainActivity : AppCompatActivity() {
 
         //選択されたアイテムを取得
         // リスナーを登録
+
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             //　アイテムが選択された時
             override fun onItemSelected(parent: AdapterView<*>?,
                                         view: View?, position: Int, id: Long) {
                 val spinnerParent = parent as Spinner
                 val selectedCalendar = spinnerParent.selectedItem as String
-                println(selectedCalendar)
+                println("スピナーから${selectedCalendar}が選択されました。")
                 if (selectedCalendar!="登録先カレンダーを選択してください"){
                     Toast.makeText(this@MainActivity, "$selectedCalendar が選択されました。", Toast.LENGTH_SHORT).show()
-
-
                 }
             }
 
@@ -208,6 +210,29 @@ class MainActivity : AppCompatActivity() {
         val addEvent = findViewById<Button>(R.id.registrationBtn)
         addEvent.setOnClickListener {
             Toast.makeText(this, "予定登録開始", Toast.LENGTH_SHORT).show()
+
+            //カレンダーIDの特定
+            //calendarIdNameListから選択されたカレンダー名（文字列）を検索し、インデックスから１引けばIDとなるはず。
+            var calendarId : Int? = null
+            val selected = spinner.selectedItem.toString()
+            var index = calendarIdNameList.indexOf(selected)
+            index -= 1
+            if (index >= 0) {
+                calendarId = calendarIdNameList[index].toInt()
+            }
+
+            //イベント開始・終了時間を設定
+            var  startMillis : Long = 0
+            var  endMillis : Long  = 0
+            var beginTime : Calendar = Calendar.getInstance()
+            //月は指定した値+1月が予定追加の対象になる
+            beginTime.set(2023, 2, 1, 10, 0)
+            startMillis = beginTime.getTimeInMillis()
+            var endTime : Calendar = Calendar.getInstance()
+            endTime.set(2023, 2, 1, 14, 0)
+            endMillis = endTime.getTimeInMillis();
+
+
             println("-----入力された情報----------------------------------------------")
             println("summary = ${summary.text}")
             println("location = ${location.text}")
@@ -223,30 +248,11 @@ class MainActivity : AppCompatActivity() {
             println("eHour = ${eHour.text}")
             println("eMinute = ${eMinute.text}")
             println("allDay = ${allDay.text}")
+            println("calendaId = $calendarId")
             println("--------------------------------------------------------------")
 
 
             println("予定登録プロセスを開始")
-            //イベント開始・終了時間を設定
-            var  startMillis : Long = 0
-            var  endMillis : Long  = 0
-            var beginTime : Calendar = Calendar.getInstance()
-            //月は指定した値+1月が予定追加の対象になる
-            beginTime.set(2023, 2, 1, 10, 0)
-            startMillis = beginTime.getTimeInMillis()
-            var endTime : Calendar = Calendar.getInstance()
-            endTime.set(2023, 2, 1, 14, 0)
-            endMillis = endTime.getTimeInMillis();
-
-            //カレンダーIDの特定
-            //calendarIdNameListから選択されたカレンダー名（文字列）を検索し、インデックスから１引けばIDとなるはず。
-            //val index = calendarIdNameList.indexOf(selected)
-
-
-
-
-
-
             //イベントデータを登録
             var cr : ContentResolver = getContentResolver()
             var values : ContentValues =  ContentValues()
@@ -255,7 +261,7 @@ class MainActivity : AppCompatActivity() {
             values.put(CalendarContract.Events.TITLE, "${summary.text}")
             values.put(CalendarContract.Events.DESCRIPTION, "${description.text}")
             values.put(CalendarContract.Events.EVENT_LOCATION, "${location.text}")
-            values.put(CalendarContract.Events.CALENDAR_ID, 9)
+            values.put(CalendarContract.Events.CALENDAR_ID, calendarId)
             values.put(CalendarContract.Events.EVENT_TIMEZONE, "Japan/Tokyo" )
             val uri : Uri? = cr.insert(CalendarContract.Events.CONTENT_URI, values);
             println("登録完了")
@@ -269,7 +275,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        val anyBtn = findViewById<Button>(R.id.anyBtn)
+        anyBtn.setOnClickListener {
+            println("anyBtn was pushed.")
+            }
+        }
     }
 
-}
 
