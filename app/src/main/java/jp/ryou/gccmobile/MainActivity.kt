@@ -1,6 +1,5 @@
 package jp.ryou.gccmobile
 
-import android.app.Application
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
@@ -24,34 +23,13 @@ import androidx.appcompat.widget.DecorContentParent
 import androidx.core.app.ActivityCompat
 import jp.ryou.gccmobile.databinding.ActivityMainBinding
 import java.util.*
-
-class MyApp :Application(){
-    var QRResult: String? = null
-    var selectedCalendar : String? = null
-    var test : String? = "Test"
-
-    companion object {
-        private var instance : MyApp? = null
-
-        fun  getInstance(): MyApp {
-            if (instance == null)
-                instance = MyApp()
-
-            return instance!!
-        }
-    }
-}
-
-
-
-
-
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -209,8 +187,6 @@ class MainActivity : AppCompatActivity() {
 
         val addEvent = findViewById<Button>(R.id.registrationBtn)
         addEvent.setOnClickListener {
-            Toast.makeText(this, "予定登録開始", Toast.LENGTH_SHORT).show()
-
             //カレンダーIDの特定
             //calendarIdNameListから選択されたカレンダー名（文字列）を検索し、インデックスから１引けばIDとなるはず。
             var calendarId : Int? = null
@@ -232,7 +208,6 @@ class MainActivity : AppCompatActivity() {
             endTime.set(2023, 2, 1, 14, 0)
             endMillis = endTime.getTimeInMillis();
 
-
             println("-----入力された情報----------------------------------------------")
             println("summary = ${summary.text}")
             println("location = ${location.text}")
@@ -251,21 +226,28 @@ class MainActivity : AppCompatActivity() {
             println("calendaId = $calendarId")
             println("--------------------------------------------------------------")
 
-
             println("予定登録プロセスを開始")
             //イベントデータを登録
-            var cr : ContentResolver = getContentResolver()
-            var values : ContentValues =  ContentValues()
-            values.put(CalendarContract.Events.DTSTART, startMillis)
-            values.put(CalendarContract.Events.DTEND, endMillis)
-            values.put(CalendarContract.Events.TITLE, "${summary.text}")
-            values.put(CalendarContract.Events.DESCRIPTION, "${description.text}")
-            values.put(CalendarContract.Events.EVENT_LOCATION, "${location.text}")
-            values.put(CalendarContract.Events.CALENDAR_ID, calendarId)
-            values.put(CalendarContract.Events.EVENT_TIMEZONE, "Japan/Tokyo" )
-            val uri : Uri? = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-            println("登録完了")
+            //登録先カレンダーが選択されていない場合は実行しない
+            if (selected != "登録先カレンダーを選択してください"){
+                Toast.makeText(this, "予定登録開始", Toast.LENGTH_SHORT).show()
+                var cr : ContentResolver = getContentResolver()
+                var values : ContentValues =  ContentValues()
+                values.put(CalendarContract.Events.DTSTART, startMillis)
+                values.put(CalendarContract.Events.DTEND, endMillis)
+                values.put(CalendarContract.Events.TITLE, "${summary.text}")
+                values.put(CalendarContract.Events.DESCRIPTION, "${description.text}")
+                values.put(CalendarContract.Events.EVENT_LOCATION, "${location.text}")
+                values.put(CalendarContract.Events.CALENDAR_ID, calendarId)
+                values.put(CalendarContract.Events.EVENT_TIMEZONE, "Japan/Tokyo" )
+                val uri : Uri? = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+                println("登録完了")
+            }else {
+                Toast.makeText(this, "登録先カレンダーを選択してください", Toast.LENGTH_SHORT).show()
         }
+        }
+
+
 
         val test = findViewById<Button>(R.id.test)
         test.setOnClickListener {
@@ -279,6 +261,44 @@ class MainActivity : AppCompatActivity() {
         anyBtn.setOnClickListener {
             println("anyBtn was pushed.")
             }
+        }
+        override fun onResume(){
+            super.onResume()
+
+            //Edittextの取得
+            val sYear = findViewById<EditText>(R.id.startYearEdit)
+            val eYear = findViewById<EditText>(R.id.endYearEdit)
+            val sMonth = findViewById<EditText>(R.id.startMonthEdit)
+            val eMonth = findViewById<EditText>(R.id.endMonthEdit)
+            val sDay = findViewById<EditText>(R.id.startDayEdit)
+            val eDay = findViewById<EditText>(R.id.endDayEdit)
+
+            //現在のDatetimeを取得
+            val now = LocalDateTime.now()
+
+//            フォーマット設定
+            val yearOnlyFormat = DateTimeFormatter.ofPattern("YYYY")
+            val monthOnlyFormat = DateTimeFormatter.ofPattern("MM")
+            val dayOnlyFormat = DateTimeFormatter.ofPattern("DD")
+
+            //フォーマットを適用
+            val thisYear = yearOnlyFormat.format(now)
+            val thisMonth = monthOnlyFormat.format(now)
+            val thisDay = dayOnlyFormat.format(now)
+
+            //EditTextを更新
+            sYear.setText(thisYear)
+            eYear.setText(thisYear)
+            sMonth.setText(thisMonth)
+            eMonth.setText(thisMonth)
+            sDay.setText(thisDay)
+            eDay.setText(thisDay)
+
+
+
+
+
+
         }
     }
 
