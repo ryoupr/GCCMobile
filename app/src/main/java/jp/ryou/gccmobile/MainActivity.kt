@@ -168,25 +168,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        ユーザー入力の受付
-        val summary = findViewById<EditText>(R.id.enteredSummary)
-        val location = findViewById<EditText>(R.id.enteredLocation)
-        val description = findViewById<EditText>(R.id.enteredDescription)
-        val sYear = findViewById<EditText>(R.id.startYearEdit)
-        val eYear = findViewById<EditText>(R.id.endYearEdit)
-        val sMonth = findViewById<EditText>(R.id.startMonthEdit)
-        val eMonth = findViewById<EditText>(R.id.endMonthEdit)
-        val sDay = findViewById<EditText>(R.id.startDayEdit)
-        val eDay = findViewById<EditText>(R.id.endDayEdit)
-        val sHour = findViewById<EditText>(R.id.startHourEdit)
-        val eHour = findViewById<EditText>(R.id.endHourEdit)
-        val sMinute = findViewById<EditText>(R.id.startMinuteEdit)
-        val eMinute = findViewById<EditText>(R.id.endMinuteEdit)
-        val allDay = findViewById<CheckBox>(R.id.allDayCheckBox)
 
 
         val addEvent = findViewById<Button>(R.id.registrationBtn)
         addEvent.setOnClickListener {
+            //        ユーザー入力の受付
+            val summary = findViewById<EditText>(R.id.enteredSummary)
+            val location = findViewById<EditText>(R.id.enteredLocation)
+            val description = findViewById<EditText>(R.id.enteredDescription)
+            val sYear = findViewById<EditText>(R.id.startYearEdit)
+            val eYear = findViewById<EditText>(R.id.endYearEdit)
+            val sMonth = findViewById<EditText>(R.id.startMonthEdit)
+            val eMonth = findViewById<EditText>(R.id.endMonthEdit)
+            val sDay = findViewById<EditText>(R.id.startDayEdit)
+            val eDay = findViewById<EditText>(R.id.endDayEdit)
+            val sHour = findViewById<EditText>(R.id.startHourEdit)
+            val eHour = findViewById<EditText>(R.id.endHourEdit)
+            val sMinute = findViewById<EditText>(R.id.startMinuteEdit)
+            val eMinute = findViewById<EditText>(R.id.endMinuteEdit)
+
             //カレンダーIDの特定
             //calendarIdNameListから選択されたカレンダー名（文字列）を検索し、インデックスから１引けばIDとなるはず。
             var calendarId : Int? = null
@@ -197,54 +197,97 @@ class MainActivity : AppCompatActivity() {
                 calendarId = calendarIdNameList[index].toInt()
             }
 
-            //イベント開始・終了時間を設定
-            var  startMillis : Long = 0
-            var  endMillis : Long  = 0
-            var beginTime : Calendar = Calendar.getInstance()
-            //月は指定した値+1月が予定追加の対象になる
-            beginTime.set(2023, 2, 1, 10, 0)
-            startMillis = beginTime.getTimeInMillis()
-            var endTime : Calendar = Calendar.getInstance()
-            endTime.set(2023, 2, 1, 14, 0)
-            endMillis = endTime.getTimeInMillis();
+            //入力された情報を文字列として取り出し。
+            val sYearTxt = sYear.text.toString()
+            val eYearTxt = eYear.text.toString()
+            val sMonthTxt = sMonth.text.toString()
+            val eMonthTxt = eMonth.text.toString()
+            var sDayTxt = sDay.text.toString()
+            var eDayTxt = eDay.text.toString()
+            var sHourTxt = sHour.text.toString()
+            var eHourTxt = eHour.text.toString()
+            var sMinuteTxt = sMinute.text.toString()
+            var eMinuteTxt = eMinute.text.toString()
+            //時間は初期値を設けていないので時間を指定しなかった場合は１２時に登録されるようにする（暫定処理）
+            if (sHourTxt == ""){
+                sHourTxt = "12"
+            }
+            if (eHourTxt == ""){
+                eHourTxt = "12"
+            }
+            if (sMinuteTxt == ""){
+                sMinuteTxt = "0"
+            }
+            if (eMinuteTxt == "") {
+                eMinuteTxt = "0"
+            }
 
-            println("-----入力された情報----------------------------------------------")
-            println("summary = ${summary.text}")
-            println("location = ${location.text}")
-            println("description = ${description.text}")
-            println("sYear = ${sYear.text}")
-            println("sMonth = ${sMonth.text}")
-            println("sDay = ${sDay.text}")
-            println("sHour = ${sHour.text}")
-            println("sMinute = ${sMinute.text}")
-            println("eYear = ${eYear.text}")
-            println("eMonth = ${eMonth.text}")
-            println("eDay = ${eDay.text}")
-            println("eHour = ${eHour.text}")
-            println("eMinute = ${eMinute.text}")
-            println("allDay = ${allDay.text}")
-            println("calendaId = $calendarId")
-            println("--------------------------------------------------------------")
+            //まずはsDay,eDayをスプリットして要素数-1でForを回す。
+            var sDaySplit = sDayTxt.split(",")
+            var eDaySplit = eDayTxt.split(",")
 
-            println("予定登録プロセスを開始")
-            //イベントデータを登録
-            //登録先カレンダーが選択されていない場合は実行しない
-            if (selected != "登録先カレンダーを選択してください"){
-                Toast.makeText(this, "予定登録開始", Toast.LENGTH_SHORT).show()
-                var cr : ContentResolver = getContentResolver()
-                var values : ContentValues =  ContentValues()
-                values.put(CalendarContract.Events.DTSTART, startMillis)
-                values.put(CalendarContract.Events.DTEND, endMillis)
-                values.put(CalendarContract.Events.TITLE, "${summary.text}")
-                values.put(CalendarContract.Events.DESCRIPTION, "${description.text}")
-                values.put(CalendarContract.Events.EVENT_LOCATION, "${location.text}")
-                values.put(CalendarContract.Events.CALENDAR_ID, calendarId)
-                values.put(CalendarContract.Events.EVENT_TIMEZONE, "Japan/Tokyo" )
-                val uri : Uri? = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-                println("登録完了")
-            }else {
-                Toast.makeText(this, "登録先カレンダーを選択してください", Toast.LENGTH_SHORT).show()
-        }
+            //for用のIndexを作成
+            val sDayIndexMax = sDaySplit.size-1
+            val eDayIndexMax = eDaySplit.size-1
+
+            //sDayとeDayの要素数が異なる（おそらく開始日にのみ複数日程を入力）場合にはsDay=eDayの処理を行う。
+            if (sDaySplit.size != eDaySplit.size){
+                eDaySplit = sDaySplit
+            }
+            for (i in 0..sDayIndexMax){
+                //日付情報をIndexをもとに設定
+                sDayTxt = sDaySplit[i]
+                eDayTxt = eDaySplit[i]
+
+//                イベント開始・終了時間を設定
+                var  startMillis : Long = 0
+                var  endMillis : Long  = 0
+                var beginTime : Calendar = Calendar.getInstance()
+                //月は指定した値+1月が予定追加の対象になる
+                beginTime.set(sYearTxt.toInt(),sMonthTxt.toInt(),sDayTxt.toInt(),sHourTxt.toInt(),sMinuteTxt.toInt())
+                startMillis = beginTime.getTimeInMillis()
+                var endTime : Calendar = Calendar.getInstance()
+                endTime.set(eYearTxt.toInt(), eMonthTxt.toInt()-1, eDayTxt.toInt(),eHourTxt.toInt(),eMinuteTxt.toInt())
+                endMillis = endTime.getTimeInMillis();
+
+                println("-----入力された情報----------------------------------------------")
+                println("summary = ${summary.text}")
+                println("location = ${location.text}")
+                println("description = ${description.text}")
+                println("sYear = ${sYear.text}")
+                println("sMonth = ${sMonth.text}")
+                println("sDay = $sDayTxt")
+                println("sHour = ${sHour.text}")
+                println("sMinute = ${sMinute.text}")
+                println("eYear = ${eYear.text}")
+                println("eMonth = ${eMonth.text}")
+                println("eDay = $eDayTxt")
+                println("eHour = ${eHour.text}")
+                println("eMinute = ${eMinute.text}")
+                println("calendaId = $calendarId")
+                println("--------------------------------------------------------------")
+
+                println("予定登録プロセスを開始")
+                //イベントデータを登録
+                //登録先カレンダーが選択されていない場合は実行しない
+                if (selected != "登録先カレンダーを選択してください"){
+                    Toast.makeText(this, "予定登録開始", Toast.LENGTH_SHORT).show()
+                    var cr : ContentResolver = getContentResolver()
+                    var values : ContentValues =  ContentValues()
+                    values.put(CalendarContract.Events.DTSTART, startMillis)
+                    values.put(CalendarContract.Events.DTEND, endMillis)
+                    values.put(CalendarContract.Events.TITLE, "${summary.text}")
+                    values.put(CalendarContract.Events.DESCRIPTION, "${description.text}")
+                    values.put(CalendarContract.Events.EVENT_LOCATION, "${location.text}")
+                    values.put(CalendarContract.Events.CALENDAR_ID, calendarId)
+                    values.put(CalendarContract.Events.EVENT_TIMEZONE, "Japan/Tokyo" )
+                    val uri : Uri? = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+                    println("登録完了")
+                }else {
+                    Toast.makeText(this, "登録先カレンダーを選択してください", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
 
 
@@ -293,12 +336,6 @@ class MainActivity : AppCompatActivity() {
             eMonth.setText(thisMonth)
             sDay.setText(thisDay)
             eDay.setText(thisDay)
-
-
-
-
-
-
         }
     }
 

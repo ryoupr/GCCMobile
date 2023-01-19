@@ -89,6 +89,34 @@
         android:text="printIndex"
         />
 
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="270dp"
+        android:layout_marginStart="20dp"
+        android:text="001"
+        android:id="@+id/one"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="@id/one"
+        app:layout_constraintLeft_toRightOf="@id/one"
+        android:layout_marginStart="20dp"
+        android:id="@+id/oneedittext"
+        />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/oneedittext"
+        app:layout_constraintLeft_toLeftOf="@id/oneedittext"
+        android:id="@+id/onetextview"
+        />
+
 
 
 

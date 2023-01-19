@@ -38,15 +38,6 @@
         app:layout_constraintStart_toEndOf="@+id/summary"
         app:layout_constraintTop_toTopOf="@+id/summary" />
 
-    <CheckBox
-        android:id="@+id/allDayCheckBox"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:checked="false"
-        android:text="@string/allDay"
-        app:layout_constraintLeft_toRightOf="@id/endMinuteEdit"
-        app:layout_constraintTop_toBottomOf="@+id/endDayEdit" />
-
     <TextView
         android:id="@+id/endSlash2Text"
         android:layout_width="15dp"
@@ -74,7 +65,7 @@
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:hint="@string/day"
-        android:inputType="number"
+        android:inputType="text"
         app:layout_constraintLeft_toLeftOf="@id/endYearEdit"
         app:layout_constraintStart_toEndOf="@+id/endSlash2Text"
         app:layout_constraintTop_toTopOf="@+id/endYearEdit" />
@@ -161,7 +152,7 @@
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:hint="@string/day"
-        android:inputType="number"
+        android:inputType="text"
         app:layout_constraintLeft_toLeftOf="@id/startYearEdit"
         app:layout_constraintStart_toEndOf="@+id/startSlash2Text"
         app:layout_constraintTop_toTopOf="@+id/startYearEdit" />

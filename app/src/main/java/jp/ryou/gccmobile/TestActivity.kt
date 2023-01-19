@@ -16,6 +16,7 @@ import java.util.*
 import android.util.Log
 import android.content.ContentValues.*
 import android.widget.EditText
+import android.widget.TextView
 
 
 class TestActivity : AppCompatActivity() {
@@ -166,6 +167,26 @@ class TestActivity : AppCompatActivity() {
             val index = values.indexOf(item)
             println(values[index-1])
             println(index)
+
+
+        }
+
+        val one = findViewById<Button>(R.id.one)
+        one.setOnClickListener{
+            val oneedit = findViewById<EditText>(R.id.oneedittext)
+            val entered = oneedit.text.toString()
+            println("Entered text = $entered")
+            val split = entered.split(",")
+            println("分割作成したリスト　＝　$split")
+//            val listsize = entered.count()
+//            println("要素数　＝　$listsize")
+            println(split.size)
+            println(split::class.simpleName)
+            if (split[0] == ""){
+                println("リストは空です")
+            }
+            val onetexview = findViewById<TextView>(R.id.onetextview)
+            onetexview.setText("要素数　＝　${split.size}")
 
 
         }
